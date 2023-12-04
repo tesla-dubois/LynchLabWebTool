@@ -19,6 +19,9 @@ https://templatemo.com/tm-504-page-one
 	<link rel="stylesheet" href="css/style.css":/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" type="text/css"/>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -192,51 +195,54 @@ https://templatemo.com/tm-504-page-one
                     </div>
                 </div>                
             </section>
-
-            <!-- Contact -->
-            <section class="parallax-window tm-section tm-section-contact" id="contact" data-parallax="scroll" data-image-src="img/bg-07.jpg">
-                <div class="tm-page-content-width">
-                    <div class="tm-translucent-white-bg tm-textbox tm-content-box tm-textbox-full-height">
-                        <h2 class="tm-section-title tm-red-text">Discussion</h2>
-                        <p>The indices presented in this analysis can be used to: </p>
-                        <div class="media tm-media">
-                            <i class="fa fa-4x fa-hospital-o tm-media-icon"></i>    
-                            <div class="media-body tm-media-body">
-                                <p class="tm-medium-font">Identify high-priority neighborhoods by focusong on neighborhoods with low guideline adherence and high cancer burden.</p>       
-                            </div>                                
-                        </div>
-                        <div class="media tm-media">
-                            <i class="fa fa-3x fa-apple tm-media-icon"></i>    
-                            <div class="media-body tm-media-body">                                    
-                                <p class="tm-medium-font">Tailor interventions to focus on drivers of low guideline adherence.</p>   
-                            </div>
-                        </div>
-                        <div class="media tm-media">
-                            <i class="fa fa-3x fa-hand-paper-o tm-media-icon"></i>    
-                            <div class="media-body tm-media-body">                                    
-                                <p class="tm-medium-font">Inform strategic plans for addressing cancer disparities.</p>   
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-                <div class="tm-copyright-div">
-                    <p class="tm-copyright-text">Photo credit: Jimmy Woo - Copyright &copy; <span class="tm-current-year"></span> Fox Chase Cancer Center
-                    - Design: TemplateMo
-                - Background Images: Unsplash </p>
-                </div>                
-            </section>
             <section class="parallax-window tm-section tm-section-contact" id="map" data-parallax="scroll" data-image-src="img/bg-01.jpg">
-                <div class="col-lg-3 col-md-12 map">
-                    <!-- Map -->
-                    <div class="map-outer tm-mb-40">
-                        <div class="gmap-canvas">
-                            <iframe width="100%" height="400" id="gmap-canvas"
-                                src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                                frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                <div class="tm-page-content-width">
+                    <div class="tm-translucent-white-bg tm-content-box tm-content-box-right tm-textbox-full-height">
+                        <div class="tm-content-box-inner">
+                            <!-- Map -->
+                            <div class="map-outer tm-mb-40">
+                                <div class="gmap-canvas">
+                                    <iframe width="50%" height="700" id="gmap-canvas"
+                                        src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                                        frameborder="1" scrolling="no" marginheight="5" marginwidth="5"></iframe>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>          
-            </section>
+                </div>
+            </section>            
+                        <!-- Contact -->
+                        <section class="parallax-window tm-section tm-section-contact" id="contact" data-parallax="scroll" data-image-src="img/bg-07.jpg">
+                            <div class="tm-page-content-width">
+                                <div class="tm-translucent-white-bg tm-textbox tm-content-box tm-textbox-full-height">
+                                    <h2 class="tm-section-title tm-red-text">Discussion</h2>
+                                    <p>The indices presented in this analysis can be used to: </p>
+                                    <div class="media tm-media">
+                                        <i class="fa fa-4x fa-hospital-o tm-media-icon"></i>    
+                                        <div class="media-body tm-media-body">
+                                            <p class="tm-medium-font">Identify high-priority neighborhoods by focusong on neighborhoods with low guideline adherence and high cancer burden.</p>       
+                                        </div>                                
+                                    </div>
+                                    <div class="media tm-media">
+                                        <i class="fa fa-3x fa-apple tm-media-icon"></i>    
+                                        <div class="media-body tm-media-body">                                    
+                                            <p class="tm-medium-font">Tailor interventions to focus on drivers of low guideline adherence.</p>   
+                                        </div>
+                                    </div>
+                                    <div class="media tm-media">
+                                        <i class="fa fa-3x fa-hand-paper-o tm-media-icon"></i>    
+                                        <div class="media-body tm-media-body">                                    
+                                            <p class="tm-medium-font">Inform strategic plans for addressing cancer disparities.</p>   
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="tm-copyright-div">
+                                <p class="tm-copyright-text">Photo credit: Jimmy Woo - Copyright &copy; <span class="tm-current-year"></span> Fox Chase Cancer Center
+                                - Design: TemplateMo
+                            - Background Images: Unsplash </p>
+                            </div>                
+                        </section>
         <!-- load JS files -->
         <script src="js/jquery-1.11.3.min.js"></script>         <!-- https://jquery.com/download/ -->
         <script src="js/isotope.pkgd.min.js"></script>          <!-- https://isotope.metafizzy.co/ -->
