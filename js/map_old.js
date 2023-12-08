@@ -18,14 +18,6 @@ var map = L.map('map', {center: [39.981192, -75.155399], zoom: 11});
     "streets": streets
 };
 
-var temple = L.marker([39.981192, -75.155399]);
-var drexel = L.marker([39.957352834066796, -75.18939693143933]);
-var penn = L.marker([39.95285548473699, -75.19309508637147]);
-
-var universities = L.layerGroup([temple, drexel, penn]);
-var universityLayer = {
-    "Phily University": universities
-};
         // Add you code here 
 
 
@@ -54,15 +46,14 @@ var universityLayer = {
                     };
                 }
 
-                // Set function for color ramp, you can use a better palette
-                function setColorFunc(density){
-                    return density > 81 ? '#810f7c' :
-                        density > 42 ? '#8856a7' :
-                        density > 24 ? '#8c96c6' :
-                        density > 11 ? '#b3cde3' :
-                        density > 0 ? '#edf8fb' :
-                                        '#BFBCBB';
+               // Set function for color ramp, you can use a better palette
+                function setColorFunc(density) {
+                    return density === "Better" ? '#36A4AB' :
+                        density === "Worse" ? '#3B2D5B' :
+                        density === "No Different" ? '#ffffff' :
+                        '#BFBCBB';
                 };
+
 
                 // Now we’ll use the onEachFeature option to add the listeners on our state layers:
                 function onEachFeatureFunc(feature, layer){
@@ -105,7 +96,7 @@ var universityLayer = {
 
                 // load GeoJSON from an external file
                 var neighborhoodsLayer = null;
-                $.getJSON("js/nbhds.geojson.geojson",function(data){
+                $.getJSON("js/nbhds.geojson",function(data){
                     // add GeoJSON layer to the map once the file is loaded
                     neighborhoodsLayer = L.geoJson(data, {
                         style: styleFunc,
@@ -113,8 +104,7 @@ var universityLayer = {
                     }).addTo(map);
 
                     var overlayLayer = {
-                        "blood_lead_level": neighborhoodsLayer,
-                        "Phily University": universities
+                        "mortality": neighborhoodsLayer
                 };
 
                 L.control.layers(baseMaps, overlayLayer).addTo(map);
@@ -148,12 +138,3 @@ var universityLayer = {
 		// Add Scale Bar to Map
 		L.control.scale({position: 'bottomleft'}).addTo(map);
 
-
-        // function setColorFunc(density){
-        //             return density > 81 ? '#810f7c' :
-        //                 density > 42 ? '#8856a7' :
-        //                 density > 24 ? '#8c96c6' :
-        //                 density > 11 ? '#b3cde3' :
-        //                 density > 0 ? '#edf8fb' :
-        //                                 '#BFBCBB';
-        //         };

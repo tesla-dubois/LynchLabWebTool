@@ -135,7 +135,7 @@ https://templatemo.com/tm-504-page-one
                             <h2 class="tm-section-title tm-blue-text">Recommendations</h2>           
                             <a href="img/TableForWebsite.png"><img src="img/TableForWebsite.png" alt="Image" class="img-fluid"></a>    
                             <p></p>
-                            <a href="#map" class="tm-btn">Check out the results.</a>
+                            <a href="#gallery" class="tm-btn">Check out the results.</a>
                         </div>                        
                         <div class="tm-copyright-div">
                             <p>Photo credit: Teitur Hansen</p>
@@ -144,6 +144,57 @@ https://templatemo.com/tm-504-page-one
                 </div>                
             </section>
             
+            <!-- Gallery -->
+            <section class="parallax-window tm-section tm-section-gallery tm-flex" id="gallery" data-parallax="scroll" data-image-src="img/bg-03.jpg">
+                <div class="tm-page-content-width tm-flex-col tm-gallery-content">
+                    <div class="tm-content-box-inner">
+                        <h2 class="tm-section-title">Multi-category gallery</h2>
+                        <!-- Add filtered gallery, 3:2 images -->
+                        <div class="iso-section">
+                            <ul class="filter-wrapper clearfix">
+                                <li><a href="#" data-filter="*" class="selected opc-main-bg">Show All</a></li>
+                                <li><a href="#" class="opc-main-bg" data-filter=".design">Design</a></li>
+                                <li><a href="#" class="opc-main-bg" data-filter=".artwork">Artwork</a></li>
+                                <li><a href="#" class="opc-main-bg" data-filter=".website">Website</a></li>
+                            </ul>
+                        </div>
+                        <div class="iso-box-section">
+                            <div class="iso-box-wrapper col4-iso-box">
+                                <div class="iso-box design col-6 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                                    <a href="img/gallery-img-01.jpg"><img src="img/gallery-img-01.jpg" alt="Image" class="img-fluid"></a>    
+                                </div>
+                                <div class="iso-box design col-6 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                                    <a href="img/gallery-img-02.jpg"><img src="img/gallery-img-02.jpg" alt="Image" class="img-fluid"></a>    
+                                </div>
+                                <div class="iso-box design col-6 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                                    <a href="img/gallery-img-03.jpg"><img src="img/gallery-img-03.jpg" alt="Image" class="img-fluid"></a>
+                                </div>
+                                <div class="iso-box design col-6 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                                    <a href="img/gallery-img-04.jpg"><img src="img/gallery-img-04.jpg" alt="Image" class="img-fluid"></a>
+                                </div>
+                                <div class="iso-box artwork col-6 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                                    <a href="img/gallery-img-05.jpg"><img src="img/gallery-img-05.jpg" alt="Image" class="img-fluid"></a>
+                                </div>
+                                <div class="iso-box artwork col-6 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                                    <a href="img/gallery-img-06.jpg"><img src="img/gallery-img-06.jpg" alt="Image" class="img-fluid"></a>
+                                </div>
+                                <div class="iso-box website col-6 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                                    <a href="img/gallery-img-07.jpg"><img src="img/gallery-img-07.jpg" alt="Image" class="img-fluid"></a>
+                                </div>
+                                <div class="iso-box website col-6 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                                    <a href="img/gallery-img-08.jpg"><img src="img/gallery-img-08.jpg" alt="Image" class="img-fluid"></a>
+                                </div>
+                                <div class="iso-box design col-6 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                                    <a href="img/gallery-img-09.jpg"><img src="img/gallery-img-09.jpg" alt="Image" class="img-fluid"></a>
+                                </div>
+                                <div class="iso-box artwork col-6 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                                    <a href="img/gallery-img-10.jpg"><img src="img/gallery-img-10.jpg" alt="Image" class="img-fluid"></a>
+                                </div>   
+                            </div>                             
+                        </div>
+                    </div>
+                </div>                
+            </section>
             <section class="parallax-window tm-section tm-section-contact" id="map" data-parallax="scroll">
                 <div class="tm-page-content-width">
                     <div class="tm-translucent-white-bg tm-content-box tm-content-box-right tm-textbox-full-height">
@@ -198,7 +249,99 @@ https://templatemo.com/tm-504-page-one
         <script src="js/imagesloaded.pkgd.min.js"></script>     <!-- https://imagesloaded.desandro.com/ --> 
         <script src="js/jquery.magnific-popup.min.js"></script> <!-- http://dimsemenov.com/plugins/magnific-popup/ -->
         <script src="js/parallax.min.js"></script>
+        <script>     
+            $(document).ready(function () {
+                // Isotope for Gallery
+                if ( $('.iso-box-wrapper').length > 0 ) { 
 
+                    var $container  = $('.iso-box-wrapper'), 
+                    $imgs     = $('.iso-box img');
+                    
+
+                    $container.imagesLoaded(function () {
+                        $container.isotope({
+                            layoutMode: 'fitRows',
+                            itemSelector: '.iso-box'
+                        });
+                        $imgs.load(function(){
+                            $container.isotope('reLayout');
+                        })
+                    });
+
+                    //filter items on button click
+                    $('.filter-wrapper li a').click(function(){
+                        var $this = $(this), filterValue = $this.attr('data-filter');
+                        $container.isotope({ 
+                            filter: filterValue,
+                            animationOptions: { 
+                                duration: 750, 
+                                easing: 'linear', 
+                                queue: false, 
+                            }                
+                        });             
+
+                        // don't proceed if already selected
+                        if ( $this.hasClass('selected') ) { 
+                            return false; 
+                        }
+
+                        var filter_wrapper = $this.closest('.filter-wrapper');
+                        filter_wrapper.find('.selected').removeClass('selected');
+                        $this.addClass('selected');
+
+                        return false;
+                    });
+                }
+
+                // Magnific Popup for Gallery
+                $('.iso-box-wrapper').magnificPopup({
+                    delegate: 'a', // child items selector, by clicking on it popup will open
+                    type: 'image',
+                    gallery:{enabled:true}
+                });
+
+                // Smooth scrolling (https://css-tricks.com/snippets/jquery/smooth-scrolling/)
+                // Select all links with hashes
+                $('a[href*="#"]')
+                  // Remove links that don't actually link to anything
+                  .not('[href="#"]')
+                  .not('[href="#0"]')
+                  .click(function(event) {
+                    // On-page links
+                    if (
+                      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
+                      && 
+                      location.hostname == this.hostname
+                    ) {
+                      // Figure out element to scroll to
+                      var target = $(this.hash);
+                      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                      // Does a scroll target exist?
+                      if (target.length) {
+                        // Only prevent default if animation is actually gonna happen
+                        event.preventDefault();
+                        $('html, body').animate({
+                          scrollTop: target.offset().top
+                        }, 600, function() {
+                          // Callback after animation
+                          // Must change focus!
+                          var $target = $(target);
+                          $target.focus();
+                          if ($target.is(":focus")) { // Checking if the target was focused
+                            return false;
+                          } else {
+                            $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
+                            $target.focus(); // Set focus again
+                          };
+                        });
+                      }
+                    }
+                  });
+
+                // Update the current year in copyright
+                $('.tm-current-year').text(new Date().getFullYear());          
+            });
+    </script>  
         <script src="js/leaflet.js"></script>
         <script src="js/imagesloaded.pkgd.min.js"></script>     
         <script src="js/map.js"></script>

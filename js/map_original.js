@@ -42,21 +42,25 @@ var universityLayer = {
                 // Listen for a click event on the Map element
                 map.on('click', onMapClick);
 
+                // Set style function that sets fill color property equal to blood lead
                 function styleFunc(feature) {
                     return {
-                        fillColor: setColorFunc(feature.properties.mortlty),
+                        fillColor: setColorFunc(feature.properties.num_bll_5p),
                         fillOpacity: 0.9,
                         weight: 1,
                         opacity: 1,
-                        color: '#000000',
+                        color: '#ffffff',
                         dashArray: '3'
                     };
                 }
 
+                // Set function for color ramp, you can use a better palette
                 function setColorFunc(density){
-                    return density === "Better" ? '#36A4AB' :
-                        density === "Worse" ? '#3B2D5B' :
-                        density === "No Different" ? '#ffffff' :
+                    return density > 81 ? '#810f7c' :
+                        density > 42 ? '#8856a7' :
+                        density > 24 ? '#8c96c6' :
+                        density > 11 ? '#b3cde3' :
+                        density > 0 ? '#edf8fb' :
                                         '#BFBCBB';
                 };
 
@@ -64,9 +68,10 @@ var universityLayer = {
                 function onEachFeatureFunc(feature, layer){
                     layer.on({
                         mouseover: highlightFeature,
-                        mouseout: resetHighlight
+                        mouseout: resetHighlight,
+                        click: zoomFeature
                     });
-                    layer.bindPopup('Level of Cancer Mortality Relative to City: '+feature.properties.mortlty);
+                    layer.bindPopup('Count: '+feature.properties.num_bll_5p);
                 }
 
                 
@@ -98,26 +103,9 @@ var universityLayer = {
                     map.fitBounds(e.target.getBounds().pad(1.5));
                 }
 
-                var cityLayer = null;
-
-                $.getJSON("city.geojson", function(data) {
-                    // add GeoJSON layer to the map once the file is loaded
-                    cityLayer = L.geoJson(data, {
-                        style: {
-                            fillColor: '#808080',  // Gray fill color
-                            color: '#FFFFFF',      // White border color
-                            weight: 1,             // Border weight
-                            opacity: 1,            // Border opacity
-                            fillOpacity: 0.7       // Fill opacity
-                        }
-                    }).addTo(map);
-                });
-                
-
-
                 // load GeoJSON from an external file
                 var neighborhoodsLayer = null;
-                $.getJSON("js/mort2.geojson",function(data){
+                $.getJSON("js/blood_lead.geojson",function(data){
                     // add GeoJSON layer to the map once the file is loaded
                     neighborhoodsLayer = L.geoJson(data, {
                         style: styleFunc,
@@ -125,7 +113,8 @@ var universityLayer = {
                     }).addTo(map);
 
                     var overlayLayer = {
-                        "Relative Cancer Mortality": neighborhoodsLayer
+                        "blood_lead_level": neighborhoodsLayer,
+                        "Phily University": universities
                 };
 
                 L.control.layers(baseMaps, overlayLayer).addTo(map);
@@ -139,12 +128,13 @@ var universityLayer = {
 		legend.onAdd = function (map) {
 			// Create Div Element and Populate it with HTML
 			var div = L.DomUtil.create('div', 'legend');		    
-			div.innerHTML += '<b>Cancer Mortality Relative to City</b><br />';
-			div.innerHTML += 'by neighborhood<br />';
+			div.innerHTML += '<b>Count of Children</b><br />';
+			div.innerHTML += 'in census tract<br />';
 			div.innerHTML += '<br>';
-			div.innerHTML += '<i style="background: #36A4AB"></i><p>Better</p>';
-			div.innerHTML += '<i style="background: #ffffff"></i><p>No Different</p>';
-			div.innerHTML += '<i style="background: #3B2D5B"></i><p>Worse</p>';
+			div.innerHTML += '<i style="background: #810f7c"></i><p>43 - 81</p>';
+			div.innerHTML += '<i style="background: #8856a7"></i><p>25 - 42</p>';
+			div.innerHTML += '<i style="background: #8c96c6"></i><p>12 - 24</p>';
+			div.innerHTML += '<i style="background: #b3cde3"></i><p>1 - 11</p>';
 			div.innerHTML += '<hr>';
 			div.innerHTML += '<i style="background: #BFBCBB"></i><p>No Data</p>';
 			
@@ -157,5 +147,13 @@ var universityLayer = {
 
 		// Add Scale Bar to Map
 		L.control.scale({position: 'bottomleft'}).addTo(map);
-        
 
+
+        // function setColorFunc(density){
+        //             return density > 81 ? '#810f7c' :
+        //                 density > 42 ? '#8856a7' :
+        //                 density > 24 ? '#8c96c6' :
+        //                 density > 11 ? '#b3cde3' :
+        //                 density > 0 ? '#edf8fb' :
+        //                                 '#BFBCBB';
+        //         };
