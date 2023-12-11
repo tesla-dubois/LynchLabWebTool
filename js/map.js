@@ -157,5 +157,15 @@ var universityLayer = {
 
 		// Add Scale Bar to Map
 		L.control.scale({position: 'bottomleft'}).addTo(map);
+
+        const search = new GeoSearch.GeoSearchControl({
+        provider: new GeoSearch.OpenStreetMapProvider(),
+        });
         
+        // var search = L.GeoSearch.GeoSearchControl({
+        //     provider: new GeoSearch.OpenStreetMapProvider(),
+        //     });
+
+        // search.addTo(map)
+        map.addControl(search);
 
